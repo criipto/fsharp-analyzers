@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+    <AssemblyName>Criipto.FSharp.Analyzers.Tests</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="TestHelpers.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="Snapshooter.Xunit" />
+    <PackageReference Include="System.Text.Json" />
+    <PackageReference Include="FSharp.SystemTextJson" />
+    <PackageReference Include="xunit" />
+    <PackageReference Include="xunit.runner.visualstudio" />
+    <PackageReference Include="FSharp.Analyzers.SDK.Testing" />
+  </ItemGroup>
+  <ItemGroup>
+        <None Include="data\**\*.fs*" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Update="FSharp.Core" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\FSharp.Analyzers\FSharp.Analyzers.fsproj" />
+  </ItemGroup>
+</Project>

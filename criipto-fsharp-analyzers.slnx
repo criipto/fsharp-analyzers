@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+  </Configurations>
+  <Project Path="src/FSharp.Analyzers/FSharp.Analyzers.fsproj" />
+  <Project Path="tests/FSharp.Analyzers.Tests/FSharp.Analyzers.Tests.fsproj" />
+</Solution>
