@@ -33,6 +33,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MissingUnitArgumentFactAnalyzer.fs" />
+    <Compile Include="MissingTypeAnnotationInlineDataAnalyzer.fs" />
   </ItemGroup>
   <Target Name="_AddAnalyzersToOutput">
     <ItemGroup>

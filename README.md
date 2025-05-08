@@ -26,6 +26,21 @@ You can then use the NuGet package like any other F# analyzer.
 
 ## Analyzers
 
+### Missing type annotations in XUnit InlineData argument
+Xunit only supports literals in `InlineData`.
+If you provide a non-literal type as input to an `InlineData` test, the test will silently be skipped by Xunit.
+This can cause surprising behavior when refactoring tests and accidentally changing test input to a non-literal.
+This can be somewhat mitigated by annotating the types of all input parameters supplied via `InlineData`.
+
+This analyzer detects missing type annotations in parameters supplied via `InlineData`.
+
+| About this analyzer |                                                                                       |
+|---------------------|---------------------------------------------------------------------------------------|
+| Code                | `CRI-XUNIT-001`                                                                       |
+| Message             | Arguments with data supplied via the InlineData annotation must have type annotations |
+| Severity            | Warning                                                                               |
+| Works in            | CLI, Ionide                                                                           |
+
 ### Missing unit argument in XUnit Fact tests
 XUnit will silently skip any tests tagged with the Fact attribute if they don't have a unit argument.
 This is an easy way to accidentally disable a test, and it is also easy to forget to add the unit argument.
