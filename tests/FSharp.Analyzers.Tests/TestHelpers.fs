@@ -81,7 +81,7 @@ let private snapshotMessages (snapshotName: SnapshotFullName) (messages: Message
 /// - Produces the same messages as in the snapshot for the given program.
 ///
 /// The snapshotName must be passed in by the caller due to limitations in Snapshooter.
-let runPositiveTest snapshotName setupContext analyzer program filename = async {
+let runPositiveTest snapshotName setupContext analyzer program = async {
     let! opts = setupContext()
     let ctx = getContext opts program
     let! msgs = analyzer ctx
