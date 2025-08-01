@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <Compile Include="TestHelpers.fs" />
+    <Compile Include="MissingUnitArgumentFactAnalyzerTests.fs" />
   </ItemGroup>
 
   <ItemGroup>

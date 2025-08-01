@@ -13,4 +13,7 @@
   <ItemGroup>
     <PackageReference Include="FSharp.Analyzers.SDK" />
   </ItemGroup>
+    <ItemGroup>
+    <Compile Include="MissingUnitArgumentFactAnalyzer.fs" />
+  </ItemGroup>
 </Project>

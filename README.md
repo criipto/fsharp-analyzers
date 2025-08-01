@@ -23,3 +23,18 @@ Negative tests run the analyzer on each test program and check that the analyzer
 ## Usage
 Run `dotnet pack --configuration Release` to generate a NuGet package (in the `bin/Release` directory).
 You can then use the NuGet package like any other F# analyzer.
+
+## Analyzers
+
+### Missing unit argument in XUnit Fact tests
+XUnit will silently skip any tests tagged with the Fact attribute if they don't have a unit argument.
+This is an easy way to accidentally disable a test, and it is also easy to forget to add the unit argument.
+
+This analyzer detects missing unit arguments in functions that have the Fact attribute.
+
+| About this analyzer |                                                                                                                          |
+|---------------------|--------------------------------------------------------------------------------------------------------------------------|
+| Code                | `CRI-XUNIT-002`                                                                                                          |
+| Message             | Test functions tagged with the XUnit [Fact] attribute must have a unit argument or the test runner will not execute them |
+| Severity            | Warning                                                                                                                  |
+| Works in            | CLI, Ionide                                                                                                              |
