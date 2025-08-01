@@ -5,7 +5,22 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <IsPackable>true</IsPackable>
     <AssemblyName>Criipto.FSharp.Analyzers</AssemblyName>
+    <PackageId>Criipto.FSharp.Analyzers</PackageId>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <Version>1.0.0</Version>
+    <Company>Criipto</Company>
+    <Authors>Frederik Krogsdal Jacobsen</Authors>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <Description>
+      A set of F# analyzers which warn against code issues previously encountered by Criipto.
+    </Description>
+    <RepositoryUrl>https://github.com/criipto/fsharp-analyzers</RepositoryUrl>
+    <Copyright>Copyright Criipto © $([System.DateTime]::UtcNow.Year)</Copyright>
+    <PackageTags>F#, fsharp, analyzers, fsharp-analyzer</PackageTags>
     <DevelopmentDependency>true</DevelopmentDependency>
+    <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
+    <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);_AddAnalyzersToOutput</TargetsForTfmSpecificContentInPackage>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Update="FSharp.Core" />
@@ -13,7 +28,15 @@
   <ItemGroup>
     <PackageReference Include="FSharp.Analyzers.SDK" />
   </ItemGroup>
-    <ItemGroup>
+  <ItemGroup>
+    <None Include="$(SolutionDir)/README.md" Visible="false" Pack="true" PackagePath=""/>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="MissingUnitArgumentFactAnalyzer.fs" />
   </ItemGroup>
+  <Target Name="_AddAnalyzersToOutput">
+    <ItemGroup>
+      <TfmSpecificPackageFile Include="$(OutputPath)\$(AssemblyName).dll" PackagePath="analyzers/dotnet/fs" />
+    </ItemGroup>
+  </Target>
 </Project>
