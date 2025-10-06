@@ -37,6 +37,7 @@
     <Compile Include="DoNotUseYourOwnRandomAnalyzer.fs" />
     <Compile Include="DoubleWrappedResultAnalyzer.fs" />
     <Compile Include="LetWildcardResultAnalyzer.fs" />
+    <Compile Include="DoResultIgnoreAnalyzer.fs" />
   </ItemGroup>
   <Target Name="_AddAnalyzersToOutput">
     <ItemGroup>

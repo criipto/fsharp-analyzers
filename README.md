@@ -87,7 +87,68 @@ This analyzer detects use of the constructors and `Create` methods of the `Rando
 | Code                | `IDURA-CRYPTO-002`                                                                                                          |
 | Message             | Do not use your own instance of RandomNumberGenerator. Depend on a global RNG pool to ensure stability of the generator.    |
 | Severity            | Warning                                                                                                                     |
-| Works in            | CLI, Ionide                                                                                                                 |
+| Works in            | CLI, Ionide                                                                                                                 |                                                                                                            |
+
+
+### Piping into `Result.ignore` in `do!` statements
+It is dangerous to use the pattern `do! ... |> Result.ignore` because this may inadvertently end up ignoring an `Error` if the function being piped accidentally returns a nested `Result`.
+
+| About this analyzer |                                                                                                                          |
+|---------------------|--------------------------------------------------------------------------------------------------------------------------|
+| Code                | `IDURA-RESULT-001`                                                                                                       |
+| Message             | The pattern do! ... |> Result.ignore is dangerous because it makes it easy to accidentally ignore errors.                |
+| Severity            | Error                                                                                                                    |
+| Works in            | CLI, Ionide                                                                                                              |
+
+
+### Piping into `TaskResult.ignore` in `do!` statements
+It is dangerous to use the pattern `do! ... |> TaskResult.ignore` because this may inadvertently end up ignoring an `Error` if the function being piped accidentally returns a nested `TaskResult`.
+Experience has shown that it is easy to accidentally introduce subtle and high severity bugs with this pattern.
+
+| About this analyzer |                                                                                                                          |
+|---------------------|--------------------------------------------------------------------------------------------------------------------------|
+| Code                | `IDURA-RESULT-002`                                                                                                       |
+| Message             | The pattern do! ... |> TaskResult.ignore is dangerous because it makes it easy to accidentally ignore errors.            |
+| Severity            | Error                                                                                                                    |
+| Works in            | CLI, Ionide                                                                                                              |
+
+
+### Piping into `Result.map ignore` in `do!` statements
+It is dangerous to use the pattern `do! ... |> Result.ignore` because this may inadvertently end up ignoring an `Error` if the function being piped accidentally returns a nested `Result`.
+Experience has shown that it is easy to accidentally introduce subtle and high severity bugs with this pattern.
+
+| About this analyzer |                                                                                                                          |
+|---------------------|--------------------------------------------------------------------------------------------------------------------------|
+| Code                | `IDURA-RESULT-003`                                                                                                       |
+| Message             | The pattern do! ... |> Result.map ignore is dangerous because it makes it easy to accidentally ignore errors.            |
+| Severity            | Error                                                                                                                    |
+| Works in            | CLI, Ionide                                                                                                              |
+
+
+### Piping into `TaskResult.map ignore` in `do!` statements
+It is dangerous to use the pattern `do! ... |> TaskResult.map ignore` because this may inadvertently end up ignoring an `Error` if the function being piped accidentally returns a nested `TaskResult`.
+Experience has shown that it is easy to accidentally introduce subtle and high severity bugs with this pattern.
+
+| About this analyzer |                                                                                                                          |
+|---------------------|--------------------------------------------------------------------------------------------------------------------------|
+| Code                | `IDURA-RESULT-004`                                                                                                       |
+| Message             | The pattern do! ... |> TaskResult.map ignore is dangerous because it makes it easy to accidentally ignore errors.        |
+| Severity            | Error                                                                                                                    |
+| Works in            | CLI, Ionide                                                                                                              |
+
+
+### Using wildcards with let! bindings
+It is dangerous to use the pattern `let! _ = ...` because this may inadvertently end up ignoring an `Error` if the function being piped accidentally returns a nested `Result`.
+
+Experience has shown that it is easy to accidentally introduce subtle and high severity bugs with this pattern.
+
+| About this analyzer |                                                                                                                          |
+|---------------------|--------------------------------------------------------------------------------------------------------------------------|
+| Code                | `IDURA-RESULT-005`                                                                                                       |
+| Message             | The pattern let! _ = ... is dangerous because it makes it easy to accidentally ignore errors.                            |
+| Severity            | Error                                                                                                                    |
+| Works in            | CLI, Ionide                                                                                                              |
+
 
 ### Did you mean to wrap this value in Result twice?
 Wrapping a value in the `Result` monad twice is often caused by accidentally ignoring a `Result.Error`.
@@ -101,14 +162,3 @@ Intentionally wrapping a value twice is very rare, but can sometimes occur, so t
 | Message             | Double-wrapping values in Result is often caused by accidentally ignoring an error.                                         |
 | Severity            | Warning                                                                                                                     |
 | Works in            | CLI, Ionide                                                                                                                 |
-
-### Using wildcards with let! bindings
-It is dangerous to use the pattern `let! _ = ...` because this may inadvertently end up ignoring an `Error` if the function being piped accidentally returns a nested `Result`.
-Experience has shown that it is easy to accidentally introduce subtle and high severity bugs with this pattern.
-
-| About this analyzer |                                                                                                                          |
-|---------------------|--------------------------------------------------------------------------------------------------------------------------|
-| Code                | `IDURA-RESULT-005`                                                                                                       |
-| Message             | The pattern let! _ = ... is dangerous because it makes it easy to accidentally ignore errors.                            |
-| Severity            | Error                                                                                                                    |
-| Works in            | CLI, Ionide                                                                                                              |

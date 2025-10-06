@@ -14,6 +14,7 @@
     <Compile Include="DoNotUseYourOwnRandomAnalyzerTests.fs" />
     <Compile Include="DoubleWrappedResultAnalyzerTests.fs" />
     <Compile Include="LetWildcardResultAnalyzerTests.fs" />
+    <Compile Include="DoResultIgnoreAnalyzerTests.fs" />
   </ItemGroup>
 
   <ItemGroup>
