@@ -6,8 +6,8 @@
     <IsPackable>true</IsPackable>
     <AssemblyName>Criipto.FSharp.Analyzers</AssemblyName>
     <PackageId>Criipto.FSharp.Analyzers</PackageId>
-    <AssemblyVersion>1.0.0.0</AssemblyVersion>
-    <Version>1.0.0</Version>
+    <AssemblyVersion>1.1.0.0</AssemblyVersion>
+    <Version>1.1.0</Version>
     <Company>Criipto</Company>
     <Authors>Frederik Krogsdal Jacobsen</Authors>
     <PackageReadmeFile>README.md</PackageReadmeFile>
