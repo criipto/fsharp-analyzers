@@ -34,6 +34,7 @@
   <ItemGroup>
     <Compile Include="MissingUnitArgumentFactAnalyzer.fs" />
     <Compile Include="MissingTypeAnnotationInlineDataAnalyzer.fs" />
+    <Compile Include="DoResultIgnoreAnalyzer.fs" />
   </ItemGroup>
   <Target Name="_AddAnalyzersToOutput">
     <ItemGroup>
