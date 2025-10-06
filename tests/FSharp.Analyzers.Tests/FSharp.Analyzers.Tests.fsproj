@@ -10,6 +10,7 @@
   <ItemGroup>
     <Compile Include="TestHelpers.fs" />
     <Compile Include="MissingUnitArgumentFactAnalyzerTests.fs" />
+    <Compile Include="MissingTypeAnnotationInlineDataAnalyzerTests.fs" />
   </ItemGroup>
 
   <ItemGroup>

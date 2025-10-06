@@ -1,0 +1,1 @@
+﻿[{"Code":"CRI-XUNIT-001","Fixes":[],"Message":"Arguments with data supplied via the InlineData annotation must have type annotations: a","Range":{"End":{"Line":7,"Column":14},"EndColumn":14,"EndLine":7,"FileName":"A.fs","Start":{"Line":7,"Column":13},"StartColumn":13,"StartLine":7},"Severity":{"Case":"Warning"},"Type":"Missing type annotations in XUnit InlineData argument"}]
