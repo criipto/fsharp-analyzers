@@ -1,4 +1,4 @@
-module Criipto.FSharp.Analyzers.Tests.TestHelpers
+module Idura.FSharp.Analyzers.Tests.TestHelpers
 
 open System.Collections.Generic
 open System.IO

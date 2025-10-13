@@ -1,4 +1,4 @@
-﻿module Criipto.FSharp.Analyzers.MissingTypeAnnotationInlineDataAnalyzer
+﻿module Idura.FSharp.Analyzers.MissingTypeAnnotationInlineDataAnalyzer
 
 open FSharp.Analyzers.SDK
 open FSharp.Analyzers.SDK.ASTCollecting
@@ -7,7 +7,7 @@ open FSharp.Compiler.Syntax
 open FSharp.Compiler.CodeAnalysis
 
 [<Literal>]
-let code = "CRI-XUNIT-001"
+let code = "IDURA-XUNIT-001"
 
 [<Literal>]
 let name = "Missing type annotations in XUnit InlineData argument"
