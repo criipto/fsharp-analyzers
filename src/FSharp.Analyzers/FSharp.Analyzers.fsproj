@@ -4,18 +4,18 @@
     <TargetFramework>net9.0</TargetFramework>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <IsPackable>true</IsPackable>
-    <AssemblyName>Criipto.FSharp.Analyzers</AssemblyName>
-    <PackageId>Criipto.FSharp.Analyzers</PackageId>
+    <AssemblyName>Idura.FSharp.Analyzers</AssemblyName>
+    <PackageId>Idura.FSharp.Analyzers</PackageId>
     <AssemblyVersion>1.1.0.0</AssemblyVersion>
     <Version>1.1.0</Version>
-    <Company>Criipto</Company>
+    <Company>Idura</Company>
     <Authors>Frederik Krogsdal Jacobsen</Authors>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <Description>
-      A set of F# analyzers which warn against code issues previously encountered by Criipto.
+      A set of F# analyzers which warn against code issues previously encountered by Idura.
     </Description>
     <RepositoryUrl>https://github.com/criipto/fsharp-analyzers</RepositoryUrl>
-    <Copyright>Copyright Criipto © $([System.DateTime]::UtcNow.Year)</Copyright>
+    <Copyright>Copyright Idura © $([System.DateTime]::UtcNow.Year)</Copyright>
     <PackageTags>F#, fsharp, analyzers, fsharp-analyzer</PackageTags>
     <DevelopmentDependency>true</DevelopmentDependency>
     <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>

@@ -4,7 +4,7 @@
     <TargetFramework>net9.0</TargetFramework>
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
-    <AssemblyName>Criipto.FSharp.Analyzers.Tests</AssemblyName>
+    <AssemblyName>Idura.FSharp.Analyzers.Tests</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>

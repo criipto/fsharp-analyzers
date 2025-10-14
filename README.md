@@ -1,6 +1,6 @@
-# Criipto.FSharp.Analyzers
+# Idura.FSharp.Analyzers
 
-A set of [F# analyzers](https://ionide.io/FSharp.Analyzers.SDK/) which warn against code issues previously encountered by Criipto.
+A set of [F# analyzers](https://ionide.io/FSharp.Analyzers.SDK/) which warn against code issues previously encountered by Idura.
 
 ## Build
 You should be able to build the project by simply running `dotnet build`.
@@ -36,7 +36,7 @@ This analyzer detects missing type annotations in parameters supplied via `Inlin
 
 | About this analyzer |                                                                                       |
 |---------------------|---------------------------------------------------------------------------------------|
-| Code                | `CRI-XUNIT-001`                                                                       |
+| Code                | `IDURA-XUNIT-001`                                                                     |
 | Message             | Arguments with data supplied via the InlineData annotation must have type annotations |
 | Severity            | Warning                                                                               |
 | Works in            | CLI, Ionide                                                                           |
@@ -49,7 +49,7 @@ This analyzer detects missing unit arguments in functions that have the Fact att
 
 | About this analyzer |                                                                                                                          |
 |---------------------|--------------------------------------------------------------------------------------------------------------------------|
-| Code                | `CRI-XUNIT-002`                                                                                                          |
+| Code                | `IDURA-XUNIT-002`                                                                                                        |
 | Message             | Test functions tagged with the XUnit [Fact] attribute must have a unit argument or the test runner will not execute them |
 | Severity            | Warning                                                                                                                  |
 | Works in            | CLI, Ionide                                                                                                              |

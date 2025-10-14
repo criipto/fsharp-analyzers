@@ -1,4 +1,4 @@
-module Criipto.FSharp.Analyzers.Tests.MissingTypeAnnotationInlineDataAnalyzerTests
+module Idura.FSharp.Analyzers.Tests.MissingTypeAnnotationInlineDataAnalyzerTests
 
 open System.IO
 
@@ -9,7 +9,7 @@ open Xunit
 open Snapshooter
 open Snapshooter.Xunit
 
-open Criipto.FSharp.Analyzers.MissingTypeAnnotationInlineDataAnalyzer
+open Idura.FSharp.Analyzers.MissingTypeAnnotationInlineDataAnalyzer
 
 let setupContext () = async {
   let! opts =

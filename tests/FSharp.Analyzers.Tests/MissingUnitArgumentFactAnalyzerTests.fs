@@ -1,4 +1,4 @@
-module Criipto.FSharp.Analyzers.Tests.MissingUnitArgumentFactAnalyzerTests
+module Idura.FSharp.Analyzers.Tests.MissingUnitArgumentFactAnalyzerTests
 
 open FSharp.Analyzers.SDK.Testing
 open TestHelpers
@@ -7,7 +7,7 @@ open Xunit
 open Snapshooter
 open Snapshooter.Xunit
 
-open Criipto.FSharp.Analyzers.MissingUnitArgumentFactAnalyzer
+open Idura.FSharp.Analyzers.MissingUnitArgumentFactAnalyzer
 
 let setupContext () = async {
   let! opts =

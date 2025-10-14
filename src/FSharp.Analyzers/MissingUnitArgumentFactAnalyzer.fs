@@ -1,4 +1,4 @@
-module Criipto.FSharp.Analyzers.MissingUnitArgumentFactAnalyzer
+module Idura.FSharp.Analyzers.MissingUnitArgumentFactAnalyzer
 
 open FSharp.Analyzers.SDK
 open FSharp.Compiler.Text
@@ -7,7 +7,7 @@ open FSharp.Compiler.CodeAnalysis
 open FSharp.Analyzers.SDK.ASTCollecting
 
 [<Literal>]
-let code = "CRI-XUNIT-002"
+let code = "IDURA-XUNIT-002"
 
 [<Literal>]
 let name = "Missing unit argument in function with Fact attribute"
