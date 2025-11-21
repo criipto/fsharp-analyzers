@@ -61,3 +61,14 @@ This analyzer detects missing unit arguments in functions that have the Fact att
 | Message             | Test functions tagged with the XUnit [Fact] attribute must have a unit argument or the test runner will not execute them |
 | Severity            | Warning                                                                                                                  |
 | Works in            | CLI, Ionide                                                                                                              |
+
+### Using wildcards with let! bindings
+It is dangerous to use the pattern `let! _ = ...` because this may inadvertently end up ignoring an `Error` if the function being piped accidentally returns a nested `Result`.
+Experience has shown that it is easy to accidentally introduce subtle and high severity bugs with this pattern.
+
+| About this analyzer |                                                                                                                          |
+|---------------------|--------------------------------------------------------------------------------------------------------------------------|
+| Code                | `IDURA-RESULT-005`                                                                                                       |
+| Message             | The pattern let! _ = ... is dangerous because it makes it easy to accidentally ignore errors.                            |
+| Severity            | Error                                                                                                                    |
+| Works in            | CLI, Ionide                                                                                                              |
