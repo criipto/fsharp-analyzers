@@ -36,11 +36,12 @@ let private analyzer
             | SynPat.Named (SynIdent(id, _), _, _, _) ->
                 allUntypedArgsWithInlineData.Add (Some id, id.idRange)
             | _ -> ()
-        and addUntypedNamePatPair (_, _, pat) : unit =
+        and addUntypedNamePatPair (NamePatPairField(_, _, _, pat, _)) : unit =
             addUntypedPat pat
         and addUntypedArgPats : SynArgPats -> unit =
             function
-            | SynArgPats.NamePatPairs(pats, _, _) -> List.iter addUntypedNamePatPair pats
+            | SynArgPats.NamePatPairs(pats, _, _) ->
+                List.iter addUntypedNamePatPair pats
             | SynArgPats.Pats pats -> List.iter addUntypedPat pats
 
         let walker = {
