@@ -36,6 +36,7 @@
     <Compile Include="MissingTypeAnnotationInlineDataAnalyzer.fs" />
     <Compile Include="DoNotUseYourOwnRandomAnalyzer.fs" />
     <Compile Include="DoubleWrappedResultAnalyzer.fs" />
+    <Compile Include="LetWildcardResultAnalyzer.fs" />
   </ItemGroup>
   <Target Name="_AddAnalyzersToOutput">
     <ItemGroup>
