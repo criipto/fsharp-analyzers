@@ -1,0 +1,1 @@
+﻿[{"Code":"IDURA-RESULT-005","Fixes":[],"Message":"The pattern let! _ = ... is dangerous because it makes it easy to accidentally ignore errors.","Range":{"End":{"Line":17,"Column":23},"EndColumn":23,"EndLine":17,"FileName":"A.fs","Start":{"Line":17,"Column":4},"StartColumn":4,"StartLine":17},"Severity":{"Case":"Error"},"Type":"Ignored variable in let! binding."}]
