@@ -24,6 +24,14 @@ Negative tests run the analyzer on each test program and check that the analyzer
 Run `dotnet pack --configuration Release` to generate a NuGet package (in the `bin/Release` directory).
 You can then use the NuGet package like any other F# analyzer.
 
+## Development
+
+### FSharp.Tree.Viewer
+The `FSharp.Tree.Viewer` project contains a small command-line utility which allows you to view the syntax tree and typed declarations as parsed by the F# compiler.
+This can be useful to figure out what to look for when traversing the abstract syntax tree to find a specific construct.
+From the `src/FSharp.Tree.Viewer` directory, the tool can be run with e.g. `dotnet run -- Program.fs`.
+Run `dotnet run -- Program.fs -- --help` to get an overview of the options.
+
 ## Analyzers
 
 ### Missing type annotations in XUnit InlineData argument
