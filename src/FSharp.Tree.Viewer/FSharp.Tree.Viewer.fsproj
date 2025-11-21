@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <IsPackable>true</IsPackable>
+    <AssemblyName>Idura.FSharp.Tree.Viewer</AssemblyName>
+    <PackageId>Idura.FSharp.Tree.Viewer</PackageId>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <Version>1.0.0</Version>
+    <Company>Idura</Company>
+    <Authors>Frederik Krogsdal Jacobsen</Authors>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <Description>
+      A CLI utility to view syntax and typed trees as seen by the F# compiler.
+    </Description>
+    <OutputType>Exe</OutputType>
+    <RepositoryUrl>https://github.com/criipto/fsharp-analyzers</RepositoryUrl>
+    <Copyright>Copyright Idura © $([System.DateTime]::UtcNow.Year)</Copyright>
+    <PackageTags>F#, fsharp, analyzers, fsharp-analyzer</PackageTags>
+    <DevelopmentDependency>true</DevelopmentDependency>
+    <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Update="FSharp.Core" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="FSharp.Compiler.Service" />
+    <PackageReference Include="Argu" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(SolutionDir)/README.md" Visible="false" Pack="true" PackagePath=""/>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.fs" />
+  </ItemGroup>
+</Project>
