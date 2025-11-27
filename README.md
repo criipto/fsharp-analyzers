@@ -61,3 +61,47 @@ This analyzer detects missing unit arguments in functions that have the Fact att
 | Message             | Test functions tagged with the XUnit [Fact] attribute must have a unit argument or the test runner will not execute them |
 | Severity            | Warning                                                                                                                  |
 | Works in            | CLI, Ionide                                                                                                              |
+
+### Piping into `Result.ignore` in `do!` statements
+It is dangerous to use the pattern `do! ... |> Result.ignore` because this may inadvertently end up ignoring an `Error` if the function being piped accidentally returns a nested `Result`.
+Experience has shown that it is easy to accidentally introduce subtle and high severity bugs with this pattern.
+
+| About this analyzer |                                                                                                                          |
+|---------------------|--------------------------------------------------------------------------------------------------------------------------|
+| Code                | `IDURA-RESULT-001`                                                                                                       |
+| Message             | The pattern do! ... |> Result.ignore is dangerous because it makes it easy to accidentally ignore errors.                |
+| Severity            | Error                                                                                                                    |
+| Works in            | CLI, Ionide                                                                                                              |
+
+### Piping into `TaskResult.ignore` in `do!` statements
+It is dangerous to use the pattern `do! ... |> TaskResult.ignore` because this may inadvertently end up ignoring an `Error` if the function being piped accidentally returns a nested `TaskResult`.
+Experience has shown that it is easy to accidentally introduce subtle and high severity bugs with this pattern.
+
+| About this analyzer |                                                                                                                          |
+|---------------------|--------------------------------------------------------------------------------------------------------------------------|
+| Code                | `IDURA-RESULT-002`                                                                                                       |
+| Message             | The pattern do! ... |> TaskResult.ignore is dangerous because it makes it easy to accidentally ignore errors.            |
+| Severity            | Error                                                                                                                    |
+| Works in            | CLI, Ionide                                                                                                              |
+
+### Piping into `Result.map ignore` in `do!` statements
+It is dangerous to use the pattern `do! ... |> Result.ignore` because this may inadvertently end up ignoring an `Error` if the function being piped accidentally returns a nested `Result`.
+Experience has shown that it is easy to accidentally introduce subtle and high severity bugs with this pattern.
+
+| About this analyzer |                                                                                                                          |
+|---------------------|--------------------------------------------------------------------------------------------------------------------------|
+| Code                | `IDURA-RESULT-003`                                                                                                       |
+| Message             | The pattern do! ... |> Result.map ignore is dangerous because it makes it easy to accidentally ignore errors.            |
+| Severity            | Error                                                                                                                    |
+| Works in            | CLI, Ionide                                                                                                              |
+
+### Piping into `TaskResult.map ignore` in `do!` statements
+It is dangerous to use the pattern `do! ... |> TaskResult.map ignore` because this may inadvertently end up ignoring an `Error` if the function being piped accidentally returns a nested `TaskResult`.
+Experience has shown that it is easy to accidentally introduce subtle and high severity bugs with this pattern.
+
+| About this analyzer |                                                                                                                          |
+|---------------------|--------------------------------------------------------------------------------------------------------------------------|
+| Code                | `IDURA-RESULT-004`                                                                                                       |
+| Message             | The pattern do! ... |> TaskResult.map ignore is dangerous because it makes it easy to accidentally ignore errors.        |
+| Severity            | Error                                                                                                                    |
+| Works in            | CLI, Ionide                                                                                                              |
