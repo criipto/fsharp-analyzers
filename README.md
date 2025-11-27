@@ -61,3 +61,30 @@ This analyzer detects missing unit arguments in functions that have the Fact att
 | Message             | Test functions tagged with the XUnit [Fact] attribute must have a unit argument or the test runner will not execute them |
 | Severity            | Warning                                                                                                                  |
 | Works in            | CLI, Ionide                                                                                                              |
+
+
+### Do not use your own random generator instance
+The random number generator instances in .NET sometimes fail with cryptographic exceptions for no observable reason.
+We have observed that this can cause the entire generator instance to permanently fail.
+For this reason, you should never use your own instances of random number generators.
+
+In non-legacy code, the solution is to use the static methods on the `RandomNumberGenerator` class, which are not bound to a specific instance.
+
+In legacy code where these are not available, you should maintain a pool of random number generator instances which replaces failed generators automatically.
+At Idura, we have implemented this in our legacy products at Idura by injecting such a pool as a dependency for every module that needs a random number generator.
+
+This analyzer detects use of the constructors and `Create` methods of the `RandomNumberGenerator` and `RNGCryptoServiceProvider` classes.
+
+| About this analyzer |                                                                                                                             |
+|---------------------|-----------------------------------------------------------------------------------------------------------------------------|
+| Code                | `IDURA-CRYPTO-001`                                                                                                          |
+| Message             | Do not use your own instance of RNGCryptoServiceProvider. Depend on a global RNG pool to ensure stability of the generator. |
+| Severity            | Warning                                                                                                                     |
+| Works in            | CLI, Ionide                                                                                                                 |
+
+| About this analyzer |                                                                                                                             |
+|---------------------|-----------------------------------------------------------------------------------------------------------------------------|
+| Code                | `IDURA-CRYPTO-002`                                                                                                          |
+| Message             | Do not use your own instance of RandomNumberGenerator. Depend on a global RNG pool to ensure stability of the generator.    |
+| Severity            | Warning                                                                                                                     |
+| Works in            | CLI, Ionide                                                                                                                 |
