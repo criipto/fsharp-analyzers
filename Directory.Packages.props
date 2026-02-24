@@ -4,8 +4,8 @@
     <DisableImplicitFSharpCoreReference>true</DisableImplicitFSharpCoreReference>
   </PropertyGroup>
   <ItemGroup>
-    <PackageVersion Include="FSharp.Analyzers.SDK" Version="[0.35.0]" />
-    <PackageVersion Include="FSharp.Analyzers.SDK.Testing" Version="[0.35.0]" />
+    <PackageVersion Include="FSharp.Analyzers.SDK" Version="[0.36.0]" />
+    <PackageVersion Include="FSharp.Analyzers.SDK.Testing" Version="[0.36.0]" />
     <PackageVersion Include="FSharp.Core" Version="[10.0.102]" />
     <PackageVersion Include="FSharp.Compiler.Service" Version="[43.10.102]" />
     <PackageVersion Include="Snapshooter.Xunit" Version="1.0.1" />
