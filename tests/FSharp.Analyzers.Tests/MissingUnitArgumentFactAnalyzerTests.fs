@@ -12,7 +12,7 @@ open Idura.FSharp.Analyzers.MissingUnitArgumentFactAnalyzer
 let setupContext () = async {
   let! opts =
           mkOptionsFromProject
-              "netstandard2.0" // ensures compatibility with both .NET Framework and newer .NET versions
+              "net9.0"
               [
                 {
                   Name = "xunit"
