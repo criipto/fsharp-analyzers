@@ -60,6 +60,7 @@ type TestFiles =
     /// Gets the source code and file names of all test programs in the specified directory.
     static member GetSources (directory: string) : IEnumerable<string[]> =
         let dir = Path.Combine [|TestFiles.dataFolder; directory |]
+        System.Console.WriteLine dir
         let getSource filename = filename |> File.ReadAllText
         let testName filename = Path.GetRelativePath(dir, filename)
         let data filename = [| getSource filename; testName filename |]
