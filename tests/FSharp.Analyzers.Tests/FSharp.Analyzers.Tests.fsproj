@@ -12,6 +12,7 @@
     <Compile Include="MissingUnitArgumentFactAnalyzerTests.fs" />
     <Compile Include="MissingTypeAnnotationInlineDataAnalyzerTests.fs" />
     <Compile Include="DoNotUseYourOwnRandomAnalyzerTests.fs" />
+    <Compile Include="DoubleWrappedResultAnalyzerTests.fs" />
   </ItemGroup>
 
   <ItemGroup>
