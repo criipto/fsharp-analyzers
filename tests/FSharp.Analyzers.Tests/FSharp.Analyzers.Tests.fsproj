@@ -13,6 +13,7 @@
     <Compile Include="MissingTypeAnnotationInlineDataAnalyzerTests.fs" />
     <Compile Include="DoNotUseYourOwnRandomAnalyzerTests.fs" />
     <Compile Include="DoubleWrappedResultAnalyzerTests.fs" />
+    <Compile Include="LetWildcardResultAnalyzerTests.fs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,6 +24,7 @@
     <PackageReference Include="xunit" />
     <PackageReference Include="xunit.runner.visualstudio" />
     <PackageReference Include="FSharp.Analyzers.SDK.Testing" />
+    <PackageReference Include="FsToolkit.Errorhandling" />
   </ItemGroup>
   <ItemGroup>
         <None Include="data\**\*.fs*" />
