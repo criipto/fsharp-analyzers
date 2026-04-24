@@ -88,3 +88,16 @@ This analyzer detects use of the constructors and `Create` methods of the `Rando
 | Message             | Do not use your own instance of RandomNumberGenerator. Depend on a global RNG pool to ensure stability of the generator.    |
 | Severity            | Warning                                                                                                                     |
 | Works in            | CLI, Ionide                                                                                                                 |
+
+### Did you mean to wrap this value in Result twice?
+Wrapping a value in the `Result` monad twice is often caused by accidentally ignoring a `Result.Error`.
+This can be catastrophic when doing validation of security-related properties.
+
+Intentionally wrapping a value twice is very rare, but can sometimes occur, so this is only a warning.
+
+| About this analyzer |                                                                                                                             |
+|---------------------|-----------------------------------------------------------------------------------------------------------------------------|
+| Code                | `IDURA-RESULT-006`                                                                                                          |
+| Message             | Double-wrapping values in Result is often caused by accidentally ignoring an error.                                         |
+| Severity            | Warning                                                                                                                     |
+| Works in            | CLI, Ionide                                                                                                                 |

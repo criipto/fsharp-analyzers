@@ -1,0 +1,1 @@
+﻿[{"Code":"IDURA-RESULT-006","Fixes":[],"Message":"Double-wrapping values in Result is often caused by accidentally ignoring an error: main","Range":{"End":{"Line":15,"Column":8},"EndColumn":8,"EndLine":15,"FileName":"A.fs","Start":{"Line":15,"Column":4},"StartColumn":4,"StartLine":15},"Severity":{"Case":"Warning"},"Type":"Did you mean to wrap this value in Result twice?"}]

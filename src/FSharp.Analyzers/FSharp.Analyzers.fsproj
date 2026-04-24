@@ -29,12 +29,13 @@
     <PackageReference Include="FSharp.Analyzers.SDK" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="$(SolutionDir)/README.md" Visible="false" Pack="true" PackagePath=""/>
+    <None Include="$(SolutionDir)/README.md" Visible="false" Pack="true" PackagePath="" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MissingUnitArgumentFactAnalyzer.fs" />
     <Compile Include="MissingTypeAnnotationInlineDataAnalyzer.fs" />
     <Compile Include="DoNotUseYourOwnRandomAnalyzer.fs" />
+    <Compile Include="DoubleWrappedResultAnalyzer.fs" />
   </ItemGroup>
   <Target Name="_AddAnalyzersToOutput">
     <ItemGroup>
