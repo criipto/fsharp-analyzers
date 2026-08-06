@@ -36,20 +36,14 @@ let private analyzer
 
         let RESULT_TYPE_NAME = typedefof<Result<unit,unit>>.FullName
 
-        // FUTURE: In version 10.0.300 of FSharp.Compiler.Services, the BasicQualifiedName becomes an option
-        // which should allow us to remove the "try ... with" from this function
         let isDoubleResult (t: FSharpType) =
             let returnType = getReturnType t
-            try
-                if returnType.BasicQualifiedName = RESULT_TYPE_NAME then
-                    let okType = returnType.GenericArguments[0]
-                    okType.BasicQualifiedName = RESULT_TYPE_NAME
-                else
-                    false
-            with
-                | :? System.InvalidOperationException ->
-                    // This happens if the type does not have a name, e.g. if it is a tuple, type parameter, anonymous record, etc.
-                    false
+
+            if TypeNames.basicQualifiedName returnType = Some RESULT_TYPE_NAME then
+                let okType = returnType.GenericArguments[0]
+                TypeNames.basicQualifiedName okType = Some RESULT_TYPE_NAME
+            else
+                false
 
         let walker: TypedTreeCollectorBase = {
             new TypedTreeCollectorBase() with
