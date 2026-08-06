@@ -40,9 +40,6 @@ let ``negative``(program : string, _: string) =
 
 [<Fact>]
 let ``gives three warnings for TripleResult``() = async {
-  let! opts = setupContext()
-  let program = TestFiles.GetSource "doubleWrappedResult/positive/TripleResult.fs"
-  let ctx = getContext opts program
-  let! msgs = cliAnalyzer ctx
+  let! msgs = messagesFor setupContext cliAnalyzer "doubleWrappedResult/positive/TripleResult.fs"
   Assert.True(msgs.Length = 3)
 }
