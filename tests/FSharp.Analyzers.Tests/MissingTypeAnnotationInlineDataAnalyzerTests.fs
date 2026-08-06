@@ -42,36 +42,24 @@ let ``negative``(program : string, _: string) =
 
 [<Fact>]
 let ``only gives one warning on multiple InlineData attributes``() = async {
-  let! opts = setupContext()
-  let program = TestFiles.GetSource "missingTypeAnnotationInlineData/positive/IgnoresMultipleInlineData.fs"
-  let ctx = getContext opts program
-  let! msgs = cliAnalyzer ctx
+  let! msgs = messagesFor setupContext cliAnalyzer "missingTypeAnnotationInlineData/positive/IgnoresMultipleInlineData.fs"
   Assert.True(msgs.Length = 1)
 }
 
 [<Fact>]
 let ``only gives one warning on multiple InlineData attributes with two parameters``() = async {
-  let! opts = setupContext()
-  let program = TestFiles.GetSource "missingTypeAnnotationInlineData/positive/IgnoresMultipleInlineDataTwo.fs"
-  let ctx = getContext opts program
-  let! msgs = cliAnalyzer ctx
+  let! msgs = messagesFor setupContext cliAnalyzer "missingTypeAnnotationInlineData/positive/IgnoresMultipleInlineDataTwo.fs"
   Assert.True(msgs.Length = 1)
 }
 
 [<Fact>]
 let ``gives two warnings for two parameters with missing types``() = async {
-  let! opts = setupContext()
-  let program = TestFiles.GetSource "missingTypeAnnotationInlineData/positive/TwoMissing.fs"
-  let ctx = getContext opts program
-  let! msgs = cliAnalyzer ctx
+  let! msgs = messagesFor setupContext cliAnalyzer "missingTypeAnnotationInlineData/positive/TwoMissing.fs"
   Assert.True(msgs.Length = 2)
 }
 
 [<Fact>]
 let ``gives one warning for one parameter missing types``() = async {
-  let! opts = setupContext()
-  let program = TestFiles.GetSource "missingTypeAnnotationInlineData/positive/TwoInts.fs"
-  let ctx = getContext opts program
-  let! msgs = cliAnalyzer ctx
+  let! msgs = messagesFor setupContext cliAnalyzer "missingTypeAnnotationInlineData/positive/TwoInts.fs"
   Assert.True(msgs.Length = 1)
 }

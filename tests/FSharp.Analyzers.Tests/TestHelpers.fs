@@ -94,6 +94,15 @@ let runPositiveTest snapshotName setupContext analyzer program = async {
     snapshotMessages snapshotName msgs
 }
 
+/// The messages the given analyzer produces for the named program under 'data', for the tests that
+/// assert on the messages themselves.
+let messagesFor setupContext (analyzer : CliContext -> Async<Message list>) (file: string) = async {
+    let! opts = setupContext()
+    let program = TestFiles.GetSource file
+    let ctx = getContext opts program
+    return! analyzer ctx
+}
+
 /// Tests that the given analyzer produces no messages for the given program.
 let runNegativeTest setupContext (analyzer : CliContext -> Async<Message list>) program = async {
     let! opts = setupContext()
