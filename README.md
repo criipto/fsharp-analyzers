@@ -162,3 +162,54 @@ Intentionally wrapping a value twice is very rare, but can sometimes occur, so t
 | Message             | Double-wrapping values in Result is often caused by accidentally ignoring an error.                                         |
 | Severity            | Warning                                                                                                                     |
 | Works in            | CLI, Ionide                                                                                                                 |
+
+
+### Guarding asynchronous construction with try/with
+A `try`/`with` whose value is a `Task`, `ValueTask` or `Async` guards the construction of the asynchronous computation, not its execution.
+Construction almost never throws: the interesting faults are raised while the computation runs, and are delivered when it is awaited, which happens outside the handler.
+The handler therefore never runs and the fault escapes unhandled.
+Asynchronous sequences are the worst case, because constructing one runs nothing at all.
+The fault is thus always raised when the consumer pulls an element.
+
+The fix is to await the computation inside the `try`, so that the computation expression's own `try`/`with` wraps execution (`task { try return! ... with ex -> ... }`), or to handle faults with a combinator such as `TaskResult.catch`.
+
+This analyzer detects `try`/`with` expressions whose type is `Task`, `ValueTask`, `Async`, `IAsyncEnumerable` or `AsyncSeq`, resolving type abbreviations first so that wrappers such as `TaskResult` are covered too.
+To stay off `try` expressions that are doing their job, it does not report a computation the `try` merely fetched rather than started, such as a lookup in a cache of work that is already running, nor a body that guards synchronous work as well as the construction unless the handler catches everything.
+The latter condition means a genuine bug is missed when the body does synchronous work and the handler names a single exception type.
+
+| About this analyzer |                                                                                                                             |
+|---------------------|-----------------------------------------------------------------------------------------------------------------------------|
+| Code                | `IDURA-ASYNC-001`                                                                                                           |
+| Message             | This 'try' guards the construction of the asynchronous computation, not its execution. A fault raised while the computation runs is delivered when it is awaited so the handler never observes it. Await the computation inside the try or handle faults with a combinator such as TaskResult.catch. |
+| Severity            | Error                                                                                                                       |
+| Works in            | CLI, Ionide                                                                                                                 |
+
+An asynchronous sequence gets a different message phrased around enumeration rather than awaiting.
+
+### Disposing a resource before the asynchronous computation completes
+A `use` binding disposes its resource when the enclosing scope is left.
+If that scope produces a `Task`, `ValueTask` or `Async`, leaving it means returning the computation, not completing it, so the resource is disposed while the computation is still using it.
+For an `IAsyncEnumerable` or an `AsyncSeq`, the resource is disposed before any computation happens.
+
+Disposing a `CancellationTokenSource` in particular does **not** cancel it.
+It releases the timer, so a deadline set with `CancelAfter` or the constructor overload silently stops working.
+
+The fix is to make the body a computation expression so that the `use` spans execution rather than construction.
+A `use` (or `use!`) inside a computation expression goes through the builder's `Using` member, so its scope already spans the awaits.
+
+This analyzer detects `try`/`finally` expressions (which is what a `use` outside a computation expression is lowered to by the compiler) whose type is `Task`, `ValueTask`, `Async`, `IAsyncEnumerable` or `AsyncSeq`.
+For a `use` it reports only when the resource is still referenced by the expression that produces the asynchronous value, so a resource that is fully consumed before that expression is built is not flagged.
+A computation the scope merely fetched rather than started is not reported.
+
+Fixing a finding from this rule changes runtime behaviour.
+Often this will manifest as a timeout that has never fired before beginning to fire, so it is worth baselining existing code and rolling out changes from this analyzer carefully.
+
+| About this analyzer |                                                                                                                             |
+|---------------------|-----------------------------------------------------------------------------------------------------------------------------|
+| Code                | `IDURA-ASYNC-002`                                                                                                           |
+| Message             | This 'use' disposes '<resource>' when the function returns the asynchronous computation, not when that computation completes. The computation still holds the resource while it runs, so it observes a disposed 'System.Threading.CancellationTokenSource'. Move the await inside the scope by making the body a computation expression (task { ... return! ... }), so the 'use' spans execution rather than construction. |
+| Severity            | Error                                                                                                                       |
+| Works in            | CLI, Ionide                                                                                                                 |
+
+The message names the resource, the builder that keeps the type of the flagged expression, and, for a `CancellationTokenSource`, the released timer.
+A non-compiler-generated `try`/`finally`, where there is no resource to name, and an asynchronous sequence, where nothing is awaited, get special messages.

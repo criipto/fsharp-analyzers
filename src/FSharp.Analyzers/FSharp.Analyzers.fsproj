@@ -39,6 +39,7 @@
     <Compile Include="DoubleWrappedResultAnalyzer.fs" />
     <Compile Include="LetWildcardResultAnalyzer.fs" />
     <Compile Include="DoResultIgnoreAnalyzer.fs" />
+    <Compile Include="AsyncConstructionAnalyzer.fs" />
   </ItemGroup>
   <Target Name="_AddAnalyzersToOutput">
     <ItemGroup>
