@@ -1,4 +1,4 @@
-name: build
+name: build and test
 on:
   push:
 concurrency:
@@ -7,8 +7,8 @@ concurrency:
 permissions:
   contents: read
 jobs:
-  build:
-    name: build
+  build-and-test:
+    name: build and test
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v5
@@ -20,3 +20,5 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --no-restore
+    - name: Test
+      run: dotnet test --no-build
