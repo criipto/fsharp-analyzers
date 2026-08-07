@@ -99,7 +99,17 @@ let projectOptions (framework: string) (packages: Package list) : Async<FSharpPr
         |> String.concat "_"
 
     let build = optionsCache.GetOrAdd(key, fun _ -> lazy mkOptionsFromProject framework packages)
-    return! Async.AwaitTask build.Value
+    let! opts = Async.AwaitTask build.Value
+
+    // mkOptionsFromProject reports a failed build by returning FSharpProjectOptions.zero rather than
+    // throwing, which turns into confusing errors from the compiler once the tests start using the
+    // options. Fail here instead, where the cause is still obvious.
+    if Array.isEmpty opts.SourceFiles && Array.isEmpty opts.OtherOptions then
+        failwith
+            $"Could not build the project options for %s{key}. The temporary project that \
+              mkOptionsFromProject builds to obtain them failed to build; its output is on stdout."
+
+    return opts
 }
 
 let jsonOptions =  JsonFSharpOptions.Default().ToJsonSerializerOptions()
