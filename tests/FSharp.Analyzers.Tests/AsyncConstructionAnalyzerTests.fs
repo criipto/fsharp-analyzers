@@ -15,11 +15,11 @@ open Idura.FSharp.Analyzers.AsyncConstructionAnalyzer
 let private options =
   lazy
     (
-      // The SDK.Testing harness cannot construct a net48 project context, so we target net9.0 like
+      // The SDK.Testing harness cannot construct a net48 project context, so we target net10.0 like
       // the other analyzers whose sample programs need full async support. The typed trees this
       // analyzer keys on are framework-independent.
       mkOptionsFromProject
-          "net9.0"
+          "net10.0"
           [
             {
               Name = "FsToolkit.Errorhandling"

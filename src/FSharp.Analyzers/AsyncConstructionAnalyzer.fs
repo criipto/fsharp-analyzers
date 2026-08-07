@@ -159,9 +159,16 @@ let private useBindingAt (untypedTree: ParsedInput) (declaration: range) =
         { new SyntaxVisitorBase<range>() with
             override _.VisitExpr(_, _, defaultTraverse, expr) =
                 match expr with
-                | SynExpr.LetOrUse(isUse = true; bindings = bindings; trivia = trivia) ->
-                    match List.tryFind declaredHere bindings with
-                    | Some binding -> Some(Range.unionRanges trivia.LetOrUseKeyword binding.RangeOfBindingWithRhs)
+                | SynExpr.LetOrUse letOrUse when letOrUse.IsUse ->
+                    match List.tryFind declaredHere letOrUse.Bindings with
+                    // The expression trivia no longer carries the 'use' keyword, but the binding
+                    // still leads with it.
+                    | Some binding ->
+                        Some(
+                            Range.unionRanges
+                                binding.Trivia.LeadingKeyword.Range
+                                binding.RangeOfBindingWithRhs
+                        )
                     | None -> defaultTraverse expr
                 | _ -> defaultTraverse expr }
 
