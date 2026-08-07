@@ -29,7 +29,9 @@
     <PackageReference Include="FSharp.Analyzers.SDK" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="$(SolutionDir)/README.md" Visible="false" Pack="true" PackagePath="" />
+    <!-- Relative to this file rather than to $(SolutionDir), which is only set when the build is
+         driven from the solution and so made packing this project on its own fail. -->
+    <None Include="$(MSBuildThisFileDirectory)../../README.md" Visible="false" Pack="true" PackagePath="" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="TypeNames.fs" />
