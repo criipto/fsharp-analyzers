@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
     <AssemblyName>Idura.FSharp.Analyzers.Tests</AssemblyName>
@@ -21,7 +21,6 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
     <PackageReference Include="Snapshooter.Xunit" />
-    <PackageReference Include="System.Text.Json" />
     <PackageReference Include="FSharp.SystemTextJson" />
     <PackageReference Include="xunit" />
     <PackageReference Include="xunit.runner.visualstudio" />
