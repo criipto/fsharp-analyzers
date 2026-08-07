@@ -15,6 +15,7 @@
     <Compile Include="DoubleWrappedResultAnalyzerTests.fs" />
     <Compile Include="LetWildcardResultAnalyzerTests.fs" />
     <Compile Include="DoResultIgnoreAnalyzerTests.fs" />
+    <Compile Include="AsyncConstructionAnalyzerTests.fs" />
   </ItemGroup>
 
   <ItemGroup>
