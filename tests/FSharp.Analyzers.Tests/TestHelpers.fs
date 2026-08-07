@@ -1,14 +1,17 @@
 module Idura.FSharp.Analyzers.Tests.TestHelpers
 
+open System.Collections.Concurrent
 open System.Collections.Generic
 open System.IO
 open System.Text.Json
 open System.Text.Json.Serialization
+open System.Threading.Tasks
 
 open Xunit
 open Snapshooter
 open Snapshooter.Xunit
 
+open FSharp.Compiler.CodeAnalysis
 open FSharp.Compiler.Text
 open FSharp.Analyzers.SDK
 open FSharp.Analyzers.SDK.Testing
@@ -71,6 +74,33 @@ type TestFiles =
     static member GetSource (file: string) : string =
         Path.Combine [|TestFiles.dataFolder; file |]
         |> File.ReadAllText
+
+// Building the options restores packages, drives MSBuild and parses the resulting binlog, which
+// costs about as much as running a test case. They do not depend on the program being analysed, so
+// each distinct combination is built once and every case awaits the same task.
+//
+// Sharing them is not just an optimisation. mkOptionsFromProject caches the binlog in a temp file
+// named after the framework and the packages only, and does not guard it against concurrent access.
+// Two test classes asking for the same combination at the same time race on that file, and the one
+// that loses reads a half-written binlog. mkOptionsFromProject swallows the resulting exception and
+// hands back FSharpProjectOptions.zero, so the failure surfaces much later as an unrelated-looking
+// error from the compiler. Building each combination exactly once keeps the classes off each
+// other's cache entry.
+let private optionsCache = ConcurrentDictionary<string, Lazy<Task<FSharpProjectOptions>>>()
+
+/// The project options for a temporary project targeting the given framework and referencing the
+/// given packages. The test programs are analysed as if they were part of that project.
+let projectOptions (framework: string) (packages: Package list) : Async<FSharpProjectOptions> = async {
+    let key =
+        packages
+        |> List.map string
+        |> List.sort
+        |> List.append [ framework ]
+        |> String.concat "_"
+
+    let build = optionsCache.GetOrAdd(key, fun _ -> lazy mkOptionsFromProject framework packages)
+    return! Async.AwaitTask build.Value
+}
 
 let jsonOptions =  JsonFSharpOptions.Default().ToJsonSerializerOptions()
 
