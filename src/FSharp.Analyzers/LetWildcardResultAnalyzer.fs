@@ -26,9 +26,9 @@ let private analyzer
             new SyntaxCollectorBase() with
                 override _.WalkExpr(_, expr) =
                     match expr with
-                    | SynExpr.LetOrUse(_, false, _, true, [binding], _, _, _) ->
-                        match binding with
-                        | SynBinding(_, _, _, _, _, _, _, SynPat.Wild _, _, _, range, _, _) ->
+                    | SynExpr.LetOrUse letOrUse when letOrUse.IsBang && not letOrUse.IsUse ->
+                        match letOrUse.Bindings with
+                        | [SynBinding(_, _, _, _, _, _, _, SynPat.Wild _, _, _, range, _, _)] ->
                             allWildLetBangBindings.Add range
                         | _ -> ()
                     | _ -> ()

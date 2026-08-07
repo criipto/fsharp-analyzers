@@ -4,12 +4,13 @@
     <DisableImplicitFSharpCoreReference>true</DisableImplicitFSharpCoreReference>
   </PropertyGroup>
   <ItemGroup>
-    <PackageVersion Include="FSharp.Analyzers.SDK" Version="[0.36.0]" />
-    <PackageVersion Include="FSharp.Analyzers.SDK.Testing" Version="[0.36.0]" />
-    <PackageVersion Include="FSharp.Core" Version="[10.0.102]" />
-    <PackageVersion Include="FSharp.Compiler.Service" Version="[43.10.102]" />
+    <PackageVersion Include="FSharp.Analyzers.SDK" Version="[0.37.2]" />
+    <PackageVersion Include="FSharp.Analyzers.SDK.Testing" Version="[0.37.2]" />
+    <!-- Must match the versions FSharp.Analyzers.SDK pins exactly, or the compiler service we run
+         against differs from the one the SDK was built against. -->
+    <PackageVersion Include="FSharp.Core" Version="[10.1.201]" />
+    <PackageVersion Include="FSharp.Compiler.Service" Version="[43.12.201]" />
     <PackageVersion Include="Snapshooter.Xunit" Version="1.0.1" />
-    <PackageVersion Include="System.Text.Json" Version="9.0.4" />
     <PackageVersion Include="FSharp.SystemTextJson" Version="1.3.13" />
     <PackageVersion Include="xunit" Version="[2.9.3]" />
     <PackageVersion Include="xunit.runner.visualstudio" Version="[2.8.2]" />

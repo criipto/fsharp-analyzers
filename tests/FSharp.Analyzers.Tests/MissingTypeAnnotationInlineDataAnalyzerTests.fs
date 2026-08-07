@@ -18,7 +18,7 @@ let private options =
   lazy
     (
       mkOptionsFromProject
-          "net9.0"
+          "net10.0"
           [
             {
               Name = "xunit"
