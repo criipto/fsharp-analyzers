@@ -28,6 +28,12 @@
     <PackageReference Update="FSharp.Core" />
   </ItemGroup>
   <ItemGroup>
+    <!-- Lets the tests exercise helpers that are not part of the analyzers' public surface. -->
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+      <_Parameter1>Idura.FSharp.Analyzers.Tests</_Parameter1>
+    </AssemblyAttribute>
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="FSharp.Analyzers.SDK" />
   </ItemGroup>
   <ItemGroup>
@@ -44,6 +50,7 @@
     <Compile Include="LetWildcardResultAnalyzer.fs" />
     <Compile Include="DoResultIgnoreAnalyzer.fs" />
     <Compile Include="AsyncConstructionAnalyzer.fs" />
+    <Compile Include="ThrowingUriConstructorAnalyzer.fs" />
   </ItemGroup>
   <Target Name="_AddAnalyzersToOutput">
     <ItemGroup>

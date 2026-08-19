@@ -213,3 +213,62 @@ Often this will manifest as a timeout that has never fired before beginning to f
 
 The message names the resource, the builder that keeps the type of the flagged expression, and, for a `CancellationTokenSource`, the released timer.
 A non-compiler-generated `try`/`finally`, where there is no resource to name, and an asynchronous sequence, where nothing is awaited, get special messages.
+
+### Throwing `Uri` or `UriBuilder` constructor
+`System.Uri` and `System.UriBuilder` report a malformed argument by throwing:
+- `UriFormatException` from the parsing constructors
+- `ArgumentException` or `ArgumentOutOfRangeException` from the `UriBuilder` overloads that take a scheme, a port, or a query string.
+
+When constructing URIs, you should thus think hard about whether an exception is really wanted or whether a regular error is better.
+There are options that return regular errors instead of exceptions:
+- `Uri.TryCreate` returns a `bool` and an out parameter, which F# surfaces as a tuple that can be pattern matched on.
+- `UriBuilder(Uri)` cannot fail on an already validated URI.
+
+The thesis of this analyzer is that a regular error is better in almost all circumstances, and that throwing an exception should really be an exceptional case.
+For this reason, it flags the following as errors:
+- Every use of an `Uri` constructor
+- Every use of an `UriBuilder` constructor except `UriBuilder()` and `UriBuilder(Uri)` (which don't throw)
+
+Wrapping the construction in a `try`/`with` does not stop it being reported, because handling the exception is still worse than not raising it.
+
+| About this analyzer |                                                                                                                             |
+|---------------------|-----------------------------------------------------------------------------------------------------------------------------|
+| Code                | `IDURA-URI-001`                                                                                                             |
+| Message             | Uri and UriBuilder constructors throw on malformed input. Prefer Uri.TryCreate so the failure can be handled as a value.    |
+| Severity            | Error                                                                                                                       |
+| Works in            | CLI, Ionide                                                                                                                 |
+
+#### Allowing a constructor that should throw
+Throwing an exception on a malformed URI is sometimes the right choice, including when:
+- The URI is a hard-coded literal
+- The URI is loaded from configuration controlled by yourself
+- The URI is vital for the operation of the service and you intentionally want to trigger incident response if something is wrong
+
+The analyzer can be suppressed by providing a reason why the use is an exceptional case where an exception is wanted.
+The reason is given in a comment extending the ordinary F# analyzer [ignore directives](https://ionide.io/FSharp.Analyzers.SDK/content/getting-started/Ignore%20Analyzer%20Hits.html).
+
+The reason can be a comma-separated tail on the ignore directive itself:
+
+```fsharp
+let home = Uri "https://example.com" // fsharpanalyzer: ignore-line IDURA-URI-ALLOW-THROW, a literal we control
+```
+
+or, when it needs more room, a block of plain `//` comments immediately above the directive, opening with the "magic word" `Should throw because:`:
+
+```fsharp
+// Should throw because: the base URL comes from appsettings and is validated
+// at startup by ConfigValidator, so a malformed value can never reach this
+// call, and one that did would mean the validator is broken - which we want
+// to find out about loudly.
+// fsharpanalyzer: ignore-line-next IDURA-URI-ALLOW-THROW
+let root = Uri cfg.BaseUrl
+```
+
+The magic word marks the comment block as a reason rather than a comment that just happens to be placed right above an ignore directive.
+Note that `(* ... *)` block comments do not work.
+
+An ignore directive with no reason is not allowed, but is reported with a different message:
+
+> This throwing constructor is suppressed with IDURA-URI-ALLOW-THROW, but no reason is given. Put a comment starting with 'Should throw because:' above the directive, saying why throwing is what you want here.
+
+Note that you MUST NOT ignore `IDURA-URI-001` itself, since this completely disables the analyzer, and thus also disables the requirement to add a reason when ignoring.
