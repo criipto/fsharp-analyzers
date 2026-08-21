@@ -17,6 +17,7 @@
     <Compile Include="LetWildcardResultAnalyzerTests.fs" />
     <Compile Include="DoResultIgnoreAnalyzerTests.fs" />
     <Compile Include="AsyncConstructionAnalyzerTests.fs" />
+    <Compile Include="ThrowingUriConstructorAnalyzerTests.fs" />
   </ItemGroup>
 
   <ItemGroup>
